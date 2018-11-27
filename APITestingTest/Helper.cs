@@ -8,16 +8,10 @@ namespace APITestingTest
 {
     public class Helper
     {
-        public interface IJsonPlaceholder
+        public interface Ireqres
         {
-            [Get("/todos/1")]
-            Task<Response> getTodos();
-        }
-
-        public Response MakeCall()
-        {
-            var iJsonPlaceholder = RestService.For<IJsonPlaceholder>("https://jsonplaceholder.typicode.com");
-            return iJsonPlaceholder.getTodos().Result;
+            [Get("/api/users/2")]
+            Task<RootObject> getTodos();
         }
     }
 }
