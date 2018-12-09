@@ -31,4 +31,26 @@ namespace APITestingTest
         public List<UserData> data { get; set; }
     }
 
+    public class SingleResourceData
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Year { get; set; }
+        public string Color { get; set; }
+        public string Pantone_Value { get; set; }
+    }
+    public class ResourceData
+    {
+        public SingleResourceData Data { get; set; }
+    }
+
+    //public class JSONHomeWork
+    //{
+    //    public string Color { get; set; }
+    //    public string Category { get; set; }
+    //    public string Type { get; set; }
+    //    public Array CodeRGBA { get; set; }
+    //    public string CodeHex { get; set; }
+
+    //}
 }

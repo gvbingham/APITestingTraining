@@ -61,5 +61,26 @@ namespace APITestingTest
                 };
             }
         }
+        [Test]
+        public void TestSingleResource()
+        {
+            var IApi = RestService.For<Helper.SingleResource>("https://reqres.in");
+            var response = IApi.GetData(1).Result.Data;
+
+            for (int i = 1; i < 13; i++)
+            {
+                response = IApi.GetData(i).Result.Data;
+
+                response.Should().NotBeNull();
+                response.ID.Should().BeGreaterThan(0);
+                response.Name.Should().NotBeNullOrEmpty();
+                response.Year.Should().BeGreaterThan(0000);
+                response.Color.Should().StartWith("#");
+                response.Pantone_Value.Should().NotBeNullOrEmpty();
+                response.Pantone_Value.Should().HaveLength(7);
+            }
+
+            
+        }
     }
 }
