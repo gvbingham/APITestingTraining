@@ -33,13 +33,18 @@ namespace APITestingTest
             [Get("/api/unknown")]
             Task<ListResourceData> GetData(int page);
         }
+        public interface CreateBody
+        {
+            [Post("/api/users")]
+            Task<CreateResponse> GetData([Body] CreateBodyObjects body);
+        }
     }
-    public class UserListParams
-    {
-        public string page { get; set; }
-    }
-    public class ResourceIDParams
-    {
-        public string id { get; set; }
-    }
+    //public class UserListParams
+    //{
+    //    public string page { get; set; }
+    //}
+    //public class ResourceIDParams
+    //{
+    //    public string id { get; set; }
+    //}
 }

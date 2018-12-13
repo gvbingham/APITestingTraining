@@ -11,12 +11,10 @@ namespace APITestingTest
         public string last_name { get; set; }
         public string avatar { get; set; }
     }
-
     public class RootObject
     {
         public UserData data { get; set; }
     }
-
     public class ListUsersJsonModels
     {
         public int page { get; set; }
@@ -25,12 +23,6 @@ namespace APITestingTest
         public int total_pages { get; set; }
         public List<UserData> data { get; set; }
     }
- 
-    //public class ListObject
-    //{
-    //    public List<UserData> data { get; set; }
-    //}
-
     public class SingleResourceData
     {
         public int ID { get; set; }
@@ -50,6 +42,18 @@ namespace APITestingTest
         public int total { get; set; }
         public int total_pages { get; set; }
         public List<SingleResourceData> data { get; set; }
+    }
+    public class CreateResponse
+    {
+        public string name { get; set; }
+        public string job { get; set; }
+        public int id { get; set; }
+        public string createdAt { get; set; }
+    }
+    public class CreateBodyObjects
+    {
+        public string name { get; set; }
+        public string job { get; set; }
     }
 
     //public class JSONHomeWork

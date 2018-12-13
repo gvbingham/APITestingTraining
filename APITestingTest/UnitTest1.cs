@@ -1,6 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Refit;
+using System;
 
 namespace APITestingTest
 {
@@ -118,6 +119,26 @@ namespace APITestingTest
                     response.data[2].Pantone_Value.Should().HaveLength(7);
                 }                
             }            
+        }
+        [Test]
+        public void TestCreate()
+        {   
+            var IAPI = RestService.For<Helper.CreateBody>("https://regres.in");
+           // var x = RestService.For<Helper.CreateResponse>("https://regres.in");
+            //var response = IAPI.GetData().Result;
+            var create = new CreateBodyObjects
+            {
+                name = "Homer",
+                job = "Nucleur Safety Inspector"
+            };
+            Console.WriteLine(DateTime.Now);
+            var x = IAPI.GetData(create).Result;
+            Console.WriteLine(DateTime.Now);
+
+            x.Should().NotBeNull();
+            //await Ipi.Collect(create);
+            //response.Should().NotBeNull();
+
         }
     }
 }
