@@ -19,8 +19,6 @@ namespace APITestingTest
             response.data.last_name.Should().NotBeNullOrEmpty();
             response.data.avatar.Should().NotBeNullOrEmpty();
         }
-
-
         [Test]
         public void TestListUsers()
         {
@@ -65,11 +63,11 @@ namespace APITestingTest
         public void TestSingleResource()
         {
             var IApi = RestService.For<Helper.SingleResource>("https://reqres.in");
-            var response = IApi.GetData(1).Result.Data;
+            var response = IApi.GetData(1).Result.data;
 
             for (int i = 1; i < 13; i++)
             {
-                response = IApi.GetData(i).Result.Data;
+                response = IApi.GetData(i).Result.data;
 
                 response.Should().NotBeNull();
                 response.ID.Should().BeGreaterThan(0);
@@ -78,9 +76,48 @@ namespace APITestingTest
                 response.Color.Should().StartWith("#");
                 response.Pantone_Value.Should().NotBeNullOrEmpty();
                 response.Pantone_Value.Should().HaveLength(7);
-            }
+            }  
+        }
+        [Test]
+        public void TestListResource()
+        {
+            var IApi = RestService.For<Helper.ListResource>("https://reqres.in");
+            var response = IApi.GetData(1).Result;
+            response.Should().NotBeNull();
+            for (int i = 1; i < 13; i++)
+            {
+                response = IApi.GetData(i).Result;
 
-            
+                response.Should().NotBeNull();
+                response.page.Should().BeInRange(1, 12);
+                response.per_page.Should().BeLessOrEqualTo(3);
+                response.total.Should().Be(12);
+                response.total_pages.Should().Be(4);
+
+                if (response.data.Count > 0)
+                {
+                    response.data[0].ID.Should().BeGreaterThan(0);
+                    response.data[0].Name.Should().NotBeNullOrEmpty();
+                    response.data[0].Year.Should().BeGreaterThan(0000);
+                    response.data[0].Color.Should().StartWith("#");
+                    response.data[0].Pantone_Value.Should().HaveLength(7);
+                    response.data[0].Should().NotBeSameAs(response.data[1]);
+                    response.data[0].Should().NotBeSameAs(response.data[2]);
+
+                    response.data[1].ID.Should().BeGreaterThan(0);
+                    response.data[1].Name.Should().NotBeNullOrEmpty();
+                    response.data[1].Year.Should().BeGreaterThan(0000);
+                    response.data[1].Color.Should().StartWith("#");
+                    response.data[1].Pantone_Value.Should().HaveLength(7);
+                    response.data[1].Should().NotBeSameAs(response.data[2]);
+
+                    response.data[2].ID.Should().BeGreaterThan(0);
+                    response.data[2].Name.Should().NotBeNullOrEmpty();
+                    response.data[2].Year.Should().BeGreaterThan(0000);
+                    response.data[2].Color.Should().StartWith("#");
+                    response.data[2].Pantone_Value.Should().HaveLength(7);
+                }                
+            }            
         }
     }
 }

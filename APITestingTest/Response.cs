@@ -26,10 +26,10 @@ namespace APITestingTest
         public List<UserData> data { get; set; }
     }
  
-    public class ListObject
-    {
-        public List<UserData> data { get; set; }
-    }
+    //public class ListObject
+    //{
+    //    public List<UserData> data { get; set; }
+    //}
 
     public class SingleResourceData
     {
@@ -41,7 +41,15 @@ namespace APITestingTest
     }
     public class ResourceData
     {
-        public SingleResourceData Data { get; set; }
+        public SingleResourceData data { get; set; }
+    }
+    public class ListResourceData
+    {
+        public int page { get; set; }
+        public int per_page { get; set; }
+        public int total { get; set; }
+        public int total_pages { get; set; }
+        public List<SingleResourceData> data { get; set; }
     }
 
     //public class JSONHomeWork
@@ -53,4 +61,16 @@ namespace APITestingTest
     //    public string CodeHex { get; set; }
 
     //}
+
+    //public class Markers
+    //{
+    //    public string Name { get; set; }
+    //    public List<decimal> Location { get; set; }
+    //    //public Array Position { get; set; }
+    //}
+    //public class Root
+    //{
+    //    public List<Markers> Markers { get; set; }
+    //}
+
 }

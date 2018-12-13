@@ -28,6 +28,11 @@ namespace APITestingTest
             [Get("/api/unknown")]
             Task<ResourceData> GetData(int id);
         }
+        public interface ListResource
+        {
+            [Get("/api/unknown")]
+            Task<ListResourceData> GetData(int page);
+        }
     }
     public class UserListParams
     {
