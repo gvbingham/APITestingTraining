@@ -50,11 +50,33 @@ namespace APITestingTest
         public int id { get; set; }
         public string createdAt { get; set; }
     }
-    public class CreateBodyObjects
+    public class UserBodyObjects
     {
         public string name { get; set; }
         public string job { get; set; }
     }
+
+    public class UserResponse
+    {
+        public string name { get; set; }
+        public string job { get; set; }
+        public string updatedAt { get; set; }
+    }
+    public class RegisterLoginBodyObjects
+    {
+        public string email { get; set; }
+        public string password { get; set; }
+    }
+    public class RegisterLoginSuccessResponse
+    {
+        public string token { get; set; }
+    }
+    public class RegisterLoginUnsuccessfulResponse
+    {
+        public string error { get; set;}
+    }
+
+
 
     //public class JSONHomeWork
     //{

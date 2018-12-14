@@ -124,14 +124,13 @@ namespace APITestingTest
         public void TestCreate()
         {   
             var IAPI = RestService.For<Helper.CreateBody>("https://reqres.in");
-            var create = new CreateBodyObjects
+            var create = new UserBodyObjects
             {
                 name = "Homer",
                 job = "Nucleur Safety Inspector"
             };
             var response = IAPI.GetData(create).Result;
             var time = DateTime.Today.ToString("yyyy-MM-dd");
-            Console.WriteLine(time);
 
             response.Should().NotBeNull();
             response.createdAt.Should().NotBeNullOrEmpty();
@@ -139,6 +138,84 @@ namespace APITestingTest
             response.id.Should().BeGreaterThan(0);
             response.job.Should().Be("Nucleur Safety Inspector");
             response.name.Should().Be("Homer");
+        }
+        [Test]
+        public void TestPutUpdateUser()
+        {
+            var IAPI = RestService.For<Helper.UpdatePutUser>("https://reqres.in");
+            var create = new UserBodyObjects
+            {
+                name = "morpheus",
+                job = "zion resident"
+            };
+            var response = IAPI.GetData(create).Result;
+            var time = DateTime.Now.ToString("yyyy-MM-dd");
+
+            response.Should().NotBeNull();
+            response.updatedAt.Should().NotBeNullOrEmpty();
+            response.updatedAt.Should().Contain(time);
+            response.job.Should().Be("zion resident");
+            response.name.Should().Be("morpheus");
+        }
+        [Test]
+        public void TestPatchUpdateUser()
+        {
+            var IAPI = RestService.For<Helper.UpdatePatchUser>("https://reqres.in");
+            var create = new UserBodyObjects
+            {
+                name = "morpheus",
+                job = "zion resident"
+            };
+            var response = IAPI.GetData(create).Result;
+            var time = DateTime.Now.ToString("yyyy-MM-dd");
+
+            response.Should().NotBeNull();
+            response.updatedAt.Should().NotBeNullOrEmpty();
+            response.updatedAt.Should().Contain(time);
+            response.job.Should().Be("zion resident");
+            response.name.Should().Be("morpheus");
+        }
+        [Test]
+        public void TestSuccessfulRegistration()
+        {
+            var IAPI = RestService.For<Helper.RegisterSuccess>("https://reqres.in");
+            var create = new RegisterLoginBodyObjects
+            {
+                email = "IsThisTheRealLife@queen.com",
+                password = "OrIsThisJustFantasy"
+            };
+            var response = IAPI.GetData(create).Result;
+
+            response.Should().NotBeNull();
+            response.token.Should().NotBeNullOrEmpty();
+            response.token.Should().HaveLength(16);
+        }
+        [Test]
+        public void TestUnsuccessfulRegistration()
+        {
+            var IAPI = RestService.For<Helper.RegisterUnsuccessful>("https://reqres.in");
+            var create = new RegisterLoginBodyObjects
+            {
+                email = "CaughtInALandslide@NoEscapeFromReality.com"
+            };
+            var response = IAPI.GetData(create).Result;
+
+            response.error.Should().Be("Missing password");
+        }
+        [Test]
+        public void TestSuccessfulLogin()
+        {
+            var IAPI = RestService.For<Helper.LoginSuccessful>("https://reqres.in");
+            var create = new RegisterLoginBodyObjects
+            {
+                email = "OpenYourEyes@LookUpToTheSkyAndSee.com",
+                password = "I'mJustAPoorBoyINeedNoSympathy!"
+            };
+            var response = IAPI.GetData(create).Result;
+
+            response.Should().NotBeNull();
+            response.token.Should().NotBeNullOrEmpty();
+            response.token.Should().HaveLength(16);
         }
     }
 }

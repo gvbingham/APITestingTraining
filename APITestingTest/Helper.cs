@@ -36,15 +36,32 @@ namespace APITestingTest
         public interface CreateBody
         {
             [Post("/api/users")]
-            Task<CreateResponse> GetData([Body] CreateBodyObjects body);
+            Task<CreateResponse> GetData([Body] UserBodyObjects body);
+        }
+        public interface UpdatePutUser
+        {
+            [Put("/api/users/2")]
+            Task<UserResponse> GetData([Body] UserBodyObjects body);
+        }
+        public interface UpdatePatchUser
+        {
+            [Patch("/api/users/2")]
+            Task<UserResponse> GetData([Body] UserBodyObjects body);
+        }
+        public interface RegisterSuccess
+        {
+            [Post("/api/register")]
+            Task<RegisterLoginSuccessResponse> GetData([Body] RegisterLoginBodyObjects body);
+        }
+        public interface RegisterUnsuccessful
+        {
+            [Post("/api/register")]
+            Task<RegisterLoginUnsuccessfulResponse> GetData([Body] RegisterLoginBodyObjects body);
+        }
+        public interface LoginSuccessful
+        {
+            [Post("/api/login")]
+            Task<RegisterLoginSuccessResponse> GetData([Body]RegisterLoginBodyObjects body);
         }
     }
-    //public class UserListParams
-    //{
-    //    public string page { get; set; }
-    //}
-    //public class ResourceIDParams
-    //{
-    //    public string id { get; set; }
-    //}
 }
