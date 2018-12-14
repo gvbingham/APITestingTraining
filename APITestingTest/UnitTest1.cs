@@ -123,22 +123,22 @@ namespace APITestingTest
         [Test]
         public void TestCreate()
         {   
-            var IAPI = RestService.For<Helper.CreateBody>("https://regres.in");
-           // var x = RestService.For<Helper.CreateResponse>("https://regres.in");
-            //var response = IAPI.GetData().Result;
+            var IAPI = RestService.For<Helper.CreateBody>("https://reqres.in");
             var create = new CreateBodyObjects
             {
                 name = "Homer",
                 job = "Nucleur Safety Inspector"
             };
-            Console.WriteLine(DateTime.Now);
-            var x = IAPI.GetData(create).Result;
-            Console.WriteLine(DateTime.Now);
+            var response = IAPI.GetData(create).Result;
+            var time = DateTime.Today.ToString("yyyy-MM-dd");
+            Console.WriteLine(time);
 
-            x.Should().NotBeNull();
-            //await Ipi.Collect(create);
-            //response.Should().NotBeNull();
-
+            response.Should().NotBeNull();
+            response.createdAt.Should().NotBeNullOrEmpty();
+            response.createdAt.Should().Contain(time);
+            response.id.Should().BeGreaterThan(0);
+            response.job.Should().Be("Nucleur Safety Inspector");
+            response.name.Should().Be("Homer");
         }
     }
 }
