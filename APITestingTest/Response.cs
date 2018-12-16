@@ -4,7 +4,7 @@ using System.Text;
 
 namespace APITestingTest
 {
-    public class UserData
+    public class UserDataResponse
     {
         public int id { get; set; }
         public string first_name { get; set; }
@@ -13,17 +13,21 @@ namespace APITestingTest
     }
     public class RootObject
     {
-        public UserData data { get; set; }
+        public UserDataResponse data { get; set; }
     }
-    public class ListUsersJsonModels
+    public class UserNotFoundResponse
+    {
+        public string error { get; set; }
+    }
+    public class ListUsersResponse
     {
         public int page { get; set; }
         public int per_page { get; set; }
         public int total { get; set; }
         public int total_pages { get; set; }
-        public List<UserData> data { get; set; }
+        public List<UserDataResponse> data { get; set; }
     }
-    public class SingleResourceData
+    public class SingleResourceResponse
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -31,17 +35,21 @@ namespace APITestingTest
         public string Color { get; set; }
         public string Pantone_Value { get; set; }
     }
+    public class ResourceNotFound
+    {
+        public string error { get; set; }
+    }
     public class ResourceData
     {
-        public SingleResourceData data { get; set; }
+        public SingleResourceResponse data { get; set; }
     }
-    public class ListResourceData
+    public class ListResourceResponse
     {
         public int page { get; set; }
         public int per_page { get; set; }
         public int total { get; set; }
         public int total_pages { get; set; }
-        public List<SingleResourceData> data { get; set; }
+        public List<SingleResourceResponse> data { get; set; }
     }
     public class CreateResponse
     {
@@ -74,6 +82,10 @@ namespace APITestingTest
     public class RegisterLoginUnsuccessfulResponse
     {
         public string error { get; set;}
+    }
+    public class DeleteUserResponse
+    {
+        public string error { get; set; }
     }
 
 
